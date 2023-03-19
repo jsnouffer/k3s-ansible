@@ -1,4 +1,14 @@
 ---
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+    use: systemd
+  become: true
+
+- name: reboot server
+  become: true
+  reboot:
+
 - name: Set same timezone on every Server
   timezone:
     name: "{{ system_timezone }}"
