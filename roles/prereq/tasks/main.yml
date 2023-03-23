@@ -4,10 +4,12 @@
     name: "{{ hostname }}"
     use: systemd
   become: true
+  register: setHostname
 
 - name: reboot server
   become: true
   reboot:
+  when: setHostname.changed
 
 - name: Set same timezone on every Server
   timezone:
