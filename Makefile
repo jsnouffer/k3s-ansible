@@ -7,6 +7,7 @@ help: ## This help.
 init: ## initialize environment
 	sudo apt install -y python3-netaddr
 	ansible-galaxy collection install -r ./collections/requirements.yml
+	python3 -m pip install -r requirements.txt
 
 deploy-k3s: ## packer build
 	ansible-playbook site.yml
@@ -17,6 +18,9 @@ get-kube-config: ## download kubeconfig file
 
 configure-k3s: ## configure k3s cluster
 	ansible-playbook --vault-password-file ~/.vault-password site.yml
+
+run-k8s-role:
+	ansible-playbook --vault-password-file ~/.vault-password kubernetes.yml
 
 reset-k3s: ## reset k3s cluster
 	ansible-playbook --vault-password-file ~/.vault-password reset.yml

@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost
+  vars_files:
+    - inventory/cobra-rocky9/group_vars/vault.yaml
+  roles:
+    - role: k8s
