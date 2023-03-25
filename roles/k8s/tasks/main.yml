@@ -18,6 +18,9 @@
       metadata:
         name: "{{ item.name }}"
         namespace: "{{ item.namespace }}"
-      stringData: "{{ secrets[0].stringData }}"
+        labels: "{{ item.labels | default({}) }}"
+      type: '{{ item.type | default("Opaque") }}'
+      data: '{{ item.data | default({}) }}'
+      stringData: '{{ item.stringData | default({}) }}'
   loop: "{{ secrets }}"
   no_log: true

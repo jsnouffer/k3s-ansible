@@ -9,9 +9,6 @@ init: ## initialize environment
 	ansible-galaxy collection install -r ./collections/requirements.yml
 	python3 -m pip install -r requirements.txt
 
-deploy-k3s: ## packer build
-	ansible-playbook site.yml
-
 get-kube-config: ## download kubeconfig file
 	mkdir -p ~/.kube
 	scp -o StrictHostKeyChecking=no cloud-user@cobra-cp1.jsnouff.net:~/.kube/config ~/.kube/config
