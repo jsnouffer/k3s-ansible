@@ -25,6 +25,7 @@ k3s_master_taint: "{{ true if groups['node'] | default([]) | length >= 1 else fa
 extra_args: >-
   --flannel-iface={{ flannel_iface }}
   --node-ip={{ k3s_node_ip }}
+  --kubelet-arg=allowed-unsafe-sysctls=net.ipv4.conf.all.src_valid_mark
 
 # change these to your liking, the only required are: --disable servicelb, --tls-san {{ apiserver_endpoint }}
 extra_server_args: >-
