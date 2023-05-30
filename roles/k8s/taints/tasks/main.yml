@@ -1,0 +1,26 @@
+- name: Apply node roles as needed
+  kubernetes.core.k8s_json_patch:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    kind: Node
+    name: "{{ item.hostname }}"
+    patch:
+      - op: add
+        path: /metadata/labels/node-role.kubernetes.io~1{{ item.role }}
+        value: "true"
+  loop: "{{ hostvars.values() }}"
+  when: item.role | default(None)
+
+- name: Taint nodes as needed
+  kubernetes.core.k8s_taint:
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    name: "{{ item.hostname }}"
+    taints:
+    - effect: NoExecute
+      key: "{{ item.taint }}"
+      value: "true"
+    - effect: NoSchedule
+      key: "{{ item.taint }}"
+      value: "true"
+  loop: "{{ hostvars.values() }}"
+  when: item.taint | default(None)

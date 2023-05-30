@@ -11,7 +11,7 @@ init: ## initialize environment
 
 get-kube-config: ## download kubeconfig file
 	mkdir -p ~/.kube
-	scp -o StrictHostKeyChecking=no cloud-user@cobra-cp1.jsnouff.net:~/.kube/config ~/.kube/config
+	scp -o StrictHostKeyChecking=no cloud-user@cobra-cp.jsnouff.net:~/.kube/config ~/.kube/config
 
 configure-k3s: ## configure k3s cluster
 	ansible-playbook --vault-password-file ~/.vault-password site.yml

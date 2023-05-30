@@ -40,12 +40,14 @@
   vars_files:
     - inventory/cobra-rocky9/group_vars/vault.yaml
   roles:
+    - role: k8s/taints
+      become: true
     - role: k8s/secrets
       become: true
 
-- hosts: localhost
-  vars_files:
-    - inventory/cobra-rocky9/group_vars/vault.yaml
-  roles:
-    - role: k8s/charts
-      become: false
+# - hosts: localhost
+#   vars_files:
+#     - inventory/cobra-rocky9/group_vars/vault.yaml
+#   roles:
+#     - role: k8s/charts
+#       become: false
