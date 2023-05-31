@@ -1,3 +1,10 @@
+- name: Install required python libraries
+  pip:
+    name:
+      - kubernetes >= 12.0.0
+      - PyYAML >= 3.11
+      - jsonpatch
+
 - name: Apply node roles as needed
   kubernetes.core.k8s_json_patch:
     kubeconfig: /etc/rancher/k3s/k3s.yaml
@@ -16,9 +23,6 @@
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     name: "{{ item.hostname }}"
     taints:
-    - effect: NoExecute
-      key: "{{ item.taint }}"
-      value: "true"
     - effect: NoSchedule
       key: "{{ item.taint }}"
       value: "true"

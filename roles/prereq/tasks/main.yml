@@ -11,6 +11,22 @@
   reboot:
   when: setHostname.changed
 
+- name: Create required mount directories
+  ansible.builtin.file:
+    path: "{{ item.path}}"
+    state: directory
+    mode: '0777'
+  loop: "{{ mounts | default([]) }}"
+
+- name: Mount filesystems as required
+  ansible.posix.mount:
+    path: "{{ item.path}}"
+    src: "{{ item.src}}"
+    opts: bind
+    fstype: ext4
+    state: mounted
+  loop: "{{ mounts | default([]) }}"
+
 - name: Set same timezone on every Server
   timezone:
     name: "{{ system_timezone }}"
