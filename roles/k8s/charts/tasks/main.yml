@@ -15,7 +15,7 @@
   kubernetes.core.helm:
     kubeconfig: "{{ working_dir.path }}/kubeconfig"
     name: external-secrets
-    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/external-secrets"
+    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/core/external-secrets"
     release_namespace: external-secrets
     dependency_update: true
     create_namespace: true
@@ -28,7 +28,7 @@
   kubernetes.core.helm:
     kubeconfig: "{{ working_dir.path }}/kubeconfig"
     name: external-secrets
-    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/external-secrets"
+    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/core/external-secrets"
     release_namespace: external-secrets
     wait: true
     values:
@@ -39,7 +39,7 @@
   kubernetes.core.helm:
     kubeconfig: "{{ working_dir.path }}/kubeconfig"
     name: argocd
-    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/argocd"
+    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/core/argocd"
     release_namespace: argocd
     dependency_update: true
     create_namespace: true
@@ -52,7 +52,7 @@
   kubernetes.core.helm:
     kubeconfig: "{{ working_dir.path }}/kubeconfig"
     name: argocd
-    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/argocd"
+    chart_ref: "{{ working_dir.path }}/repo/kubernetes-deployments/core/argocd"
     release_namespace: argocd
     wait: true
     values:
